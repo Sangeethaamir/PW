@@ -12,8 +12,8 @@ const PASSWORD = process.env.OHRM_PASSWORD || 'admin123';
     await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
   
     // Step 2: Fill in credentials and submit
-    await page.fill('input[name="username"]', 'Admin');
-    await page.fill('input[name="password"]', 'admin123');
-    await page.click('button[type="submit"]'); 
+  await page.fill('input[name="username"]', USERNAME);
+  await page.fill('input[name="password"]', PASSWORD);
+  await page.click('button[type="submit"]');
    
   });
