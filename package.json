@@ -1,0 +1,19 @@
+{
+  "name": "playwright-github-actions-demo",
+  "version": "1.0.0",
+  "description": "Simple Playwright login/logout test wired to GitHub Actions CI",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.0"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
