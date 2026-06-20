@@ -12,6 +12,15 @@ jobs:
   test:
     runs-on: ubuntu-latest        # the virtual machine GitHub spins up for you
 
+    # Matrix: GitHub spins up one parallel job per entry in `browser`,
+    # so chromium/firefox/webkit all run at the same time instead of
+    # one after another. `fail-fast: false` means if one browser fails,
+    # the other two still finish (instead of GitHub cancelling them).
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4   # pulls your repo's code onto that VM
@@ -24,16 +33,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+      - name: Install Playwright browser (${{ matrix.browser }})
+        run: npx playwright install --with-deps ${{ matrix.browser }}
 
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Run Playwright tests (${{ matrix.browser }})
+        env:
+          OHRM_USERNAME: ${{ secrets.OHRM_USERNAME }}
+          OHRM_PASSWORD: ${{ secrets.OHRM_PASSWORD }}
+        run: npx playwright test --project=${{ matrix.browser }}
 
-      - name: Upload test report
+      - name: Upload test report (${{ matrix.browser }})
         if: always()                # upload even if the test failed, so you can see why
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.browser }}
           path: playwright-report/
           retention-days: 30
