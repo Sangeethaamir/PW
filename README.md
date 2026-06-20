@@ -1,3 +1,4 @@
+[![Playwright Tests](https://github.com/Sangeethaamir/PW/actions/workflows/playwright.yml/badge.svg)](https://github.com/Sangeethaamir/PW/actions/workflows/playwright.yml)
 # Playwright + GitHub Actions Demo
 
 A login/logout test on the OrangeHRM demo site, wired to run automatically via GitHub Actions.
