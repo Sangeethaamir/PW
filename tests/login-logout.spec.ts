@@ -1,10 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-// Read credentials from environment variables instead of hardcoding them.
-// Locally, these fall back to the public OrangeHRM demo defaults so you don't
-// need any extra setup to run the test on your own machine.
-// In CI, these come from encrypted GitHub Secrets (see workflow file + README).
-// Add a change to check in VSTS and github
+
 const USERNAME = process.env.OHRM_USERNAME || 'Admin';
 const PASSWORD = process.env.OHRM_PASSWORD || 'admin123';
 
